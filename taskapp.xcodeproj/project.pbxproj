@@ -13,6 +13,7 @@
 		A738A5592452C43D0034578D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A738A5572452C43D0034578D /* Main.storyboard */; };
 		A738A55B2452C43E0034578D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A738A55A2452C43E0034578D /* Assets.xcassets */; };
 		A738A55E2452C43E0034578D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A738A55C2452C43E0034578D /* LaunchScreen.storyboard */; };
+		A738A5662452CE6B0034578D /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A738A5652452CE6B0034578D /* InputViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		A738A55A2452C43E0034578D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A738A55D2452C43E0034578D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A738A55F2452C43E0034578D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A738A5652452CE6B0034578D /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				A738A5512452C43D0034578D /* AppDelegate.swift */,
 				A738A5532452C43D0034578D /* SceneDelegate.swift */,
 				A738A5552452C43D0034578D /* ViewController.swift */,
+				A738A5652452CE6B0034578D /* InputViewController.swift */,
 				A738A5572452C43D0034578D /* Main.storyboard */,
 				A738A55A2452C43E0034578D /* Assets.xcassets */,
 				A738A55C2452C43E0034578D /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				A738A5562452C43D0034578D /* ViewController.swift in Sources */,
 				A738A5522452C43D0034578D /* AppDelegate.swift in Sources */,
 				A738A5542452C43D0034578D /* SceneDelegate.swift in Sources */,
+				A738A5662452CE6B0034578D /* InputViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,7 +298,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.0003.kaori.taskapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -312,7 +316,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.0003.kaori.taskapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
