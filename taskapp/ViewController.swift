@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import RealmSwift //Realmを使う
+import RealmSwift
 import UserNotifications
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
@@ -49,18 +49,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.reloadData()
     }
     
-    // 検索ボタンがタップされた時 ＜追加4/25＞
+    // 検索ボタンがタップされた時
     func searchBarSearchButtonClicked(searchBar:UISearchBar) {
         // 編集時、キャンセルボタンを有効
         searchBar.showsCancelButton = true
+        //検索する
+        searchItems(searchText: searchBar.text! as String)
     }
     
-    // キャンセルボタンがタップされた時 ＜追加4/25＞
+    // キャンセルボタンがタップされた時
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        // 検索バーを空にする
+        searchBar.text = ""
         // キャンセルボタンがタップされた時、キャンセルボタンを無効
         // キーボードを隠す
         searchBar.showsCancelButton = false
         searchBar.resignFirstResponder()
+        //tableViewを再読み込みする
+        tableView.reloadData()
     }
     
     // データの数（＝セルの数）を返すメソッド
