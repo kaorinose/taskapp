@@ -18,37 +18,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Realmインスタンスを取得する
     let realm = try! Realm()
     
-    //テーブルビューに表示する配列 ＜追加4/25＞
-    private var items: Array<String> = []
-    
-    //検索結果が入る配列 ＜追加4/25＞
-    private var searchResult: Array<String> = []
-    
-    // DB内のタスクが格納されるリスト。
+    // DB内のタスクが格納されるリスト
     // 日付の近い順でソート：昇順
     // 以降内容をアップデートするとリスト内は自動的に更新される。
     var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
+    
+    // DB内の検索結果が格納されるリスト
+    var searchResulttaskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
-        // 検索バーの初期化  ＜追加4/25＞
+        // 検索バーの初期化
         searchText.delegate = self
         searchText.placeholder = "カテゴリ名を入力してください"
     }
     
-    // 渡された文字列を含む要素を検索し、テーブルビューを再表示する ＜追加4/25＞
+    // 渡された文字列を含む要素を検索し、テーブルビューを再表示する
     func searchItems(searchText: String) {
-        //要素を検索する
+        //要素を検索する（%@：searchTextで入力された値）
         if searchText != "" {
-            searchResult = items.filter { item in
-                return item.contains(searchText)
-                } as Array
+            searchResulttaskArray = realm.objects(Task.self).filter("category == %@")
         } else {
             //渡された文字列が空の場合は全てを表示
-            searchResult = items
+            searchResulttaskArray = taskArray
         }
         //tableViewを再読み込みする
         tableView.reloadData()
