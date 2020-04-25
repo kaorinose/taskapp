@@ -10,12 +10,19 @@ import UIKit
 import RealmSwift //Realmを使う
 import UserNotifications
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchText: UISearchBar!
     
     // Realmインスタンスを取得する
     let realm = try! Realm()
+    
+    //テーブルビューに表示する配列 ＜追加4/25＞
+    private var items: Array<String> = []
+    
+    //検索結果が入る配列 ＜追加4/25＞
+    private var searchResult: Array<String> = []
     
     // DB内のタスクが格納されるリスト。
     // 日付の近い順でソート：昇順
@@ -27,6 +34,38 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
+        // 検索バーの初期化  ＜追加4/25＞
+        searchText.delegate = self
+        searchText.placeholder = "カテゴリ名を入力してください"
+    }
+    
+    // 渡された文字列を含む要素を検索し、テーブルビューを再表示する ＜追加4/25＞
+    func searchItems(searchText: String) {
+        //要素を検索する
+        if searchText != "" {
+            searchResult = items.filter { item in
+                return item.contains(searchText)
+                } as Array
+        } else {
+            //渡された文字列が空の場合は全てを表示
+            searchResult = items
+        }
+        //tableViewを再読み込みする
+        tableView.reloadData()
+    }
+    
+    // 検索ボタンがタップされた時 ＜追加4/25＞
+    func searchBarSearchButtonClicked(searchBar:UISearchBar) {
+        // 編集時、キャンセルボタンを有効
+        searchBar.showsCancelButton = true
+    }
+    
+    // キャンセルボタンがタップされた時 ＜追加4/25＞
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        // キャンセルボタンがタップされた時、キャンセルボタンを無効
+        // キーボードを隠す
+        searchBar.showsCancelButton = false
+        searchBar.resignFirstResponder()
     }
     
     // データの数（＝セルの数）を返すメソッド
