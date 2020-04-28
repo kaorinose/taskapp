@@ -41,6 +41,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //要素を検索する（%@：searchTextで入力された値）
         if searchText != "" {
             searchResulttaskArray = realm.objects(Task.self).filter("category == %@")
+            
+            print("searchResulttaskArray \(searchResulttaskArray)") // デバッグ用に追加する
+            
         } else {
             //渡された文字列が空の場合は全てを表示
             searchResulttaskArray = taskArray
@@ -50,21 +53,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     // 検索ボタンがタップされた時
-    func searchBarSearchButtonClicked(searchBar:UISearchBar) {
+    func searchBarSearchButtonClicked(searchText: UISearchBar) {
+        
+        print("searchBarSearchButtonClicked \(searchBarSearchButtonClicked)") // デバッグ用に追加する
+        
         // 編集時、キャンセルボタンを有効
-        searchBar.showsCancelButton = true
-        //検索する
-        searchItems(searchText: searchBar.text! as String)
+        searchText.showsCancelButton = true
+        
+        print("searchBarSearchButtonClicked \(searchBarSearchButtonClicked)") // デバッグ用に追加する
+        
+        // 検索する
+        searchItems(searchText: searchText.text! as String)
     }
     
     // キャンセルボタンがタップされた時
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(searchText: UISearchBar) {
         // 検索バーを空にする
-        searchBar.text = ""
+        searchText.text = ""
         // キャンセルボタンがタップされた時、キャンセルボタンを無効
+        searchText.showsCancelButton = false
         // キーボードを隠す
-        searchBar.showsCancelButton = false
-        searchBar.resignFirstResponder()
+        searchText.resignFirstResponder()
         //tableViewを再読み込みする
         tableView.reloadData()
     }
