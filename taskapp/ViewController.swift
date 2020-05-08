@@ -37,7 +37,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func searchItems(searchText: String) {
         //要素を検索する（%@：searchTextで入力された値）
         if searchText != "" {
-            taskArray = realm.objects(Task.self).filter("category == %@")
+            taskArray = realm.objects(Task.self).filter("category = %@", searchText)
         }
         //渡された文字列が空の場合は全てを表示
         //tableViewを再読み込みする
@@ -45,25 +45,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     // 検索ボタンがタップされた時
-    func searchBarSearchButtonClicked(searchText: UISearchBar) {
-        
-        print("searchBarSearchButtonClicked \(searchBarSearchButtonClicked)") // デバッグ用に追加する
-        
+    func searchBarSearchButtonClicked(_ searchText: UISearchBar) {
         // 編集時、キャンセルボタンを有効
         searchText.showsCancelButton = true
-        
-        print("searchBarSearchButtonClicked \(searchBarSearchButtonClicked)") // デバッグ用に追加する
-        
         // 検索する
         searchItems(searchText: searchText.text! as String)
     }
     
     // キャンセルボタンがタップされた時
-    func searchBarCancelButtonClicked(searchText: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchText: UISearchBar) {
         // 検索バーを空にする
         searchText.text = ""
-        // キャンセルボタンがタップされた時、キャンセルボタンを無効
-        searchText.showsCancelButton = false
         // キーボードを隠す
         searchText.resignFirstResponder()
         //tableViewを再読み込みする
