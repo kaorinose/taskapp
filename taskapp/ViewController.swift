@@ -37,10 +37,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func searchItems(searchText: String) {
         //要素を検索する（%@：searchTextで入力された値）
         if searchText != "" {
-            taskArray = realm.objects(Task.self).filter("category = %@", searchText)
+            taskArray = realm.objects(Task.self).filter("category = %@", searchText).sorted(byKeyPath: "date", ascending: true)
         }
-        //渡された文字列が空の場合は全てを表示
-        //tableViewを再読み込みする
+        // tableViewを再読み込みする
         tableView.reloadData()
     }
     
@@ -58,7 +57,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchText.text = ""
         // キーボードを隠す
         searchText.resignFirstResponder()
-        //tableViewを再読み込みする
+        // 全てを表示
+        taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
+        // tableViewを再読み込みする
         tableView.reloadData()
     }
     
