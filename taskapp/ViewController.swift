@@ -23,9 +23,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // 以降内容をアップデートするとリスト内は自動的に更新される。
     var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
     
-    // DB内の検索結果が格納されるリスト
-    var searchResulttaskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -40,14 +37,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func searchItems(searchText: String) {
         //要素を検索する（%@：searchTextで入力された値）
         if searchText != "" {
-            searchResulttaskArray = realm.objects(Task.self).filter("category == %@")
-            
-            print("searchResulttaskArray \(searchResulttaskArray)") // デバッグ用に追加する
-            
-        } else {
-            //渡された文字列が空の場合は全てを表示
-            searchResulttaskArray = taskArray
+            taskArray = realm.objects(Task.self).filter("category == %@")
         }
+        //渡された文字列が空の場合は全てを表示
         //tableViewを再読み込みする
         tableView.reloadData()
     }
